@@ -1,4 +1,8 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Platform, Dimensions } from 'react-native';
+
+const { width } = Dimensions.get('window');
+const isMobile = width < 768;
+const isNarrowMobile = width <= 430;
 
 export const contactStyles = StyleSheet.create({
   contactSection: {
@@ -107,49 +111,57 @@ export const contactStyles = StyleSheet.create({
   },
   // Captcha styles
   captchaContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 12,
+    flexDirection: isMobile ? 'column' : 'row',
+    alignItems: 'stretch',
+    gap: isMobile ? 8 : 12,
   },
   captchaQuestion: {
     flexDirection: 'row',
     alignItems: 'center',
     backgroundColor: '#f8f9fa',
-    paddingHorizontal: 16,
-    paddingVertical: 12,
+    paddingHorizontal: isMobile ? 18 : 16,
+    paddingVertical: isMobile ? 16 : 12,
     borderRadius: 8,
     borderWidth: 1,
     borderColor: '#dee2e6',
     flex: 1,
+    minHeight: isMobile ? 50 : 'auto',
   },
   captchaQuestionText: {
-    fontSize: 16,
-    fontWeight: '500',
+    fontSize: isMobile ? 18 : 16,
+    fontWeight: '600',
     color: '#212529',
     flex: 1,
+    lineHeight: isMobile ? 24 : 20,
   },
   refreshCaptcha: {
-    marginLeft: 8,
-    padding: 4,
+    marginLeft: isMobile ? 12 : 8,
+    padding: isMobile ? 8 : 4,
+    backgroundColor: '#e9ecef',
+    borderRadius: 6,
+    minWidth: isMobile ? 40 : 'auto',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   refreshCaptchaText: {
-    fontSize: 16,
+    fontSize: isMobile ? 18 : 16,
   },
   captchaInput: {
     borderWidth: 1,
     borderColor: '#dee2e6',
     borderRadius: 8,
-    paddingHorizontal: 12,
-    paddingVertical: 12,
-    fontSize: 16,
+    paddingHorizontal: isMobile ? 16 : 12,
+    paddingVertical: isMobile ? 16 : 12,
+    fontSize: isMobile ? 18 : 16,
     backgroundColor: '#ffffff',
-    minWidth: 80,
+    minWidth: isMobile ? 100 : 80,
     textAlign: 'center',
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 1 },
     shadowOpacity: 0.05,
     shadowRadius: 2,
     elevation: 1,
+    minHeight: isMobile ? 50 : 'auto',
   },
   // Error and Success Message Styles
   errorContainer: {

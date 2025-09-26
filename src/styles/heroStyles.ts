@@ -3,6 +3,7 @@ import { StyleSheet, Platform, Dimensions } from 'react-native';
 const isWeb = Platform.OS === 'web';
 const { width, height } = Dimensions.get('window');
 const isMobile = width < 768; // Mobile breakpoint
+const isNarrowMobile = width <= 430; // Narrow mobile screens like iPhone 14 Pro Max
 
 export const heroStyles = StyleSheet.create({
   hero: {
@@ -13,16 +14,17 @@ export const heroStyles = StyleSheet.create({
   overlay: {
     flex: 1,
     paddingVertical: 40,
-    paddingHorizontal: 20,
+    paddingHorizontal: isNarrowMobile ? 12 : 20,
   },
   heroContent: {
     maxWidth: 1200,
+    width: '100%',
     ...(isWeb && { marginHorizontal: 'auto' as any }),
   },
   section: {
     marginBottom: 40,
     backgroundColor: 'rgba(255, 255, 255, 0.95)',
-    padding: 24,
+    padding: isNarrowMobile ? 16 : 24,
     borderRadius: 12,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 4 },
@@ -35,7 +37,7 @@ export const heroStyles = StyleSheet.create({
     paddingHorizontal: 0,
   },
   sideHeading: {
-    fontSize: 28,
+    fontSize: isNarrowMobile ? 24 : 28,
     fontWeight: '700',
     color: '#0d6efd',
     marginBottom: 16,
@@ -44,9 +46,9 @@ export const heroStyles = StyleSheet.create({
     paddingLeft: 12,
   },
   contentText: {
-    fontSize: 18,
+    fontSize: isNarrowMobile ? 16 : 18,
     color: '#212529',
-    lineHeight: 26,
+    lineHeight: isNarrowMobile ? 24 : 26,
     marginBottom: 16,
     textAlign: 'justify',
   },
@@ -68,9 +70,10 @@ export const heroStyles = StyleSheet.create({
     paddingHorizontal: 0,
   },
   pledgeImage: {
-    width: isWeb ? 400 : width * 0.8,
-    height: isWeb ? 300 : 200,
+    width: isWeb ? 400 : isNarrowMobile ? width * 0.9 : width * 0.8,
+    height: isWeb ? 300 : isNarrowMobile ? 180 : 200,
     borderRadius: 8,
+    maxWidth: isNarrowMobile ? 380 : undefined,
   },
   carouselContainer: {
     flexDirection: 'row',
@@ -220,7 +223,7 @@ export const heroStyles = StyleSheet.create({
   autoCarouselContainer: {
     backgroundColor: 'rgba(248, 249, 250, 0.9)',
     borderRadius: 12,
-    padding: 20,
+    padding: isNarrowMobile ? 12 : 20,
     marginVertical: 20,
     minHeight: isWeb ? 400 : 'auto',
     flexDirection: isMobile ? 'column' : 'row', // Row for desktop, column for mobile
@@ -239,16 +242,17 @@ export const heroStyles = StyleSheet.create({
     marginRight: isMobile ? 0 : 20,
   },
   autoCarouselImage: {
-    width: isWeb ? 400 : width * 0.85,
-    height: isWeb ? 320 : 250,
+    width: isWeb ? 400 : isNarrowMobile ? width * 0.9 : width * 0.85,
+    height: isWeb ? 320 : isNarrowMobile ? 220 : 250,
     borderRadius: 12,
+    maxWidth: isNarrowMobile ? 380 : undefined,
   },
   carouselTextContainer: {
     width: isMobile ? '100%' : '50%',
     justifyContent: 'center',
     alignItems: isMobile ? 'center' : 'flex-start',
     marginBottom: 20,
-    paddingHorizontal: 10,
+    paddingHorizontal: isNarrowMobile ? 5 : 10,
   },
   autoCarouselTitle: {
     fontSize: isWeb ? 24 : 20,
